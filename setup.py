@@ -5,6 +5,7 @@ long_description = open('README.markdown').read()
 setup(
     name='django-shortcuts',
     version="0.1.0",
+    package_data={'shortcuts': ['templates/shortcuts/*.html']},
     package_dir={'shortcuts': 'shortcuts'},
     packages=['shortcuts'],
     description='Django shortcut (redirect) application',
