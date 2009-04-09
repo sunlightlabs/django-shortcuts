@@ -1,4 +1,4 @@
-from shortcut.models import Shortcut
+from shortcuts.models import Shortcut
 from django.shortcuts import render_to_response
 
 def redirect(request, alias):

@@ -7,9 +7,9 @@
 	</head>
 	<body>
 		{% if shortcut.is_valid %}
-			<p><a href="{{ shortcut.redirect }}">Click here</a> if this page does not refresh after 5 seconds.</p>
+			<p><a href="{{ shortcut.redirect }}">Click here</a> if this page does not refresh after 10 seconds.</p>
 			{% if shortcut.analytics %}
-				{{ shortcut.analytics }}
+				{{ shortcut.analytics|safe }}
 			{% endif %}
 		{% else %}
 			<p><em>{{ shortcut.title }}</em></p>
