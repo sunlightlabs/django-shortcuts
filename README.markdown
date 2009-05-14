@@ -34,7 +34,7 @@ By default, all aliases will be served from:
 
 	http://[configured_url]/s/[alias]
 
-The _p_ prefix can be changed by setting __SHORTCUT_PREFIX__ in settings.py.
+The _s_ prefix can be changed by setting __SHORTCUT_PREFIX__ in settings.py.
 
 
 ### urls.py
