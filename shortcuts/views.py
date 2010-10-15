@@ -1,17 +1,17 @@
 from shortcuts.models import Shortcut
-from django.shortcuts import render_to_response
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponsePermanentRedirect
+from django.shortcuts import get_object_or_404, render_to_response
 
 def redirect(request, alias):
-    try:
-        sc = Shortcut.objects.get(alias=alias)
-        sc.is_valid = True
-    except Shortcut.DoesNotExist:
-        sc = {
-            "alias": alias,
-            "redirect": request.path,
-            "interval": 60,
-            "title": "INVALID SHORTCUT ALIAS: %s" % alias,
-            "analytics": None,
-            "is_valid": False,
-        }
-    return render_to_response('shortcuts/redirect.html', {'shortcut': sc})
+    
+    sc = get_object_or_404(Shortcut, alias=alias)
+    
+    if sc.method == 'http301':
+        return HttpResponsePermanentRedirect(sc.redirect_to)
+    elif sc.method == 'http302':
+        return HttpResponseRedirect(sc.redirect_to)
+    elif sc.method == 'meta':    
+        return render_to_response('shortcuts/redirect.html', {'shortcut': sc})
+
+    return HttpResponse('')
+    

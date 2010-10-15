@@ -2,17 +2,17 @@
 <html>
 	<head>
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-		<title>{% if shortcut.title %}{{ shortcut.title }}{% endif %}</title>
-		<meta http-equiv="refresh" content="{{ shortcut.interval }};URL={{ shortcut.redirect }}">
+		{% if shortcut.title %}
+			<title>{{ shortcut.title }}</title>
+		{% else %}
+			<title>redirecting to {{ shortcut.redirect_to }}</title>
+		{% endif %}
+		<meta http-equiv="refresh" content="{{ shortcut.interval }};URL={{ shortcut.redirect_to }}">
 	</head>
 	<body>
-		{% if shortcut.is_valid %}
-			<p><a href="{{ shortcut.redirect }}">Click here</a> if this page does not refresh after 10 seconds.</p>
-			{% if shortcut.analytics %}
-				{{ shortcut.analytics|safe }}
-			{% endif %}
-		{% else %}
-			<p><em>{{ shortcut.title }}</em></p>
+		<p><a href="{{ shortcut.redirect_to }}">Click here</a> if this page does not refresh after {{ shortcut.interval }} seconds.</p>
+		{% if shortcut.analytics %}
+			{{ shortcut.analytics|safe }}
 		{% endif %}
 	</body>
 </html>
